@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Anniversary</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    text-align: center;
+}
+
+/* ===== Heading ===== */
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 4.8rem;
+    margin-top: 40px;
+    color: #ffffff;
+    letter-spacing: 3px;
+    text-shadow:
+        0 0 12px rgba(255,255,255,0.95),
+        0 0 28px rgba(255,255,255,0.7),
+        0 0 55px rgba(255,255,255,0.5);
+    animation: subtleGlow 4s ease-in-out infinite alternate;
+    z-index: 2;
+}
+
+@keyframes subtleGlow {
+    from {
+        text-shadow:
+            0 0 10px rgba(255,255,255,0.7),
+            0 0 25px rgba(255,255,255,0.4);
+    }
+    to {
+        text-shadow:
+            0 0 18px rgba(255,255,255,1),
+            0 0 45px rgba(255,255,255,0.8);
+    }
+}
+
+/* ===== Letter Section ===== */
+#letter {
+    margin-top: 50px;
+    width: 80%;
+    max-width: 720px;
+    font-size: 1.25rem;
+    color: white;
+    line-height: 2.1;
+    letter-spacing: 0.5px;
+    min-height: 220px;
+    z-index: 2;
+    white-space: pre-wrap; /* preserves paragraph spacing properly */
+}
+
+/* Flying character animation */
+.char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(25px) scale(0.95);
+    filter: blur(6px);
+    transition: 
+        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.6s ease,
+        filter 0.6s ease;
+}
+
+.char.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+}
+
+/* ===== Background Hearts ===== */
+.heart {
+    position: absolute;
+    bottom: -20px;
+    font-size: 28px;
+    opacity: 0.85;
+    animation: floatUp 10s linear infinite;
+    z-index: 0;
+    filter: blur(0.5px);
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.85;
+    }
+    100% {
+        transform: translateY(-110vh) scale(1.4);
+        opacity: 0;
+    }
+}
+
+.cat {
+    position: absolute;
+    top: 55%;
+    width: 180px;
+    max-width: 20vw;
+    transform: translateY(-50%);
+    z-index: 1;
+    opacity: 0.9;
+    animation: floatCat 4s ease-in-out infinite;
+}
+
+.cat.left {
+    left: 40px;
+}
+
+.cat.right {
+    right: 40px;
+}
+
+@keyframes floatCat {
+    0% { transform: translateY(-50%) translateY(0px); }
+    50% { transform: translateY(-50%) translateY(-15px); }
+    100% { transform: translateY(-50%) translateY(0px); }
+}
+</style>
+</head>
+<body>
+
+<h1>Happy 1 Year Anniversary My Love Kate 💖✨</h1>
+
+<div id="letter"></div>
+<img class="cat left"
+src="https://media.tenor.com/LGswLLbMPI8AAAAe/cat-cat-love.png"
+alt="Love Cat">
+
+<img class="cat right"
+src="https://i.pinimg.com/736x/b9/d6/ec/b9d6ec7cd26587c7e01336b93a723876.jpg"
+alt="Love Cat">
+
+<script>
+/* ===== Floating Hearts ===== */
+const heartSymbols = ["♡", "❤", "♥"];
+const heartColors = [
+    "rgba(255,255,255,0.95)",
+    "rgba(255,182,193,0.95)",
+    "rgba(255,160,210,0.9)",
+    "rgba(255,200,230,0.9)"
+];
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.fontSize = (Math.random() * 35 + 20) + "px";
+    heart.style.color = heartColors[Math.floor(Math.random() * heartColors.length)];
+    heart.style.animationDuration = (Math.random() * 5 + 8) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 12000);
+}
+setInterval(createHeart, 250);
+
+/* ===== Premium Game-Style Flying Typewriter ===== */
+const text = `Ever since I got you in my life, everything feels so vibrant and full of colours — like you brought light into places I didn’t even know were dark
+
+You are truly my happiness and I am so grateful to have such a loving and loyal partner like you, my love. Even though we are miles apart in this long distance journey, my heart has never felt closer to someone.
+
+Kate, you make every late night call worth it, every countdown meaningful, and every "I miss you" filled with hope instead of sadness. Distance may test us, but it will never break what we have.
+
+This one year with you has been the most beautiful chapter of my life — and I can't wait to write forever with you.`;
+
+const letter = document.getElementById("letter");
+
+let index = 0;
+
+function typeEffect() {
+    if (index < text.length) {
+        const span = document.createElement("span");
+        span.classList.add("char");
+        span.textContent = text[index];
+        letter.appendChild(span);
+
+        setTimeout(() => {
+            span.classList.add("show");
+        }, 10);
+
+        index++;
+        setTimeout(typeEffect, 20);
+    }
+}
+
+typeEffect();
+</script>
+
+</body>
+</html>
